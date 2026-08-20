@@ -1,0 +1,32 @@
+# release-gate
+
+A deterministic policy endpoint for CI container release decisions.
+
+## Run locally
+
+```bash
+npm install
+npm start          # starts on http://localhost:3000
+npm test           # runs the offline policy test suite
+```
+
+## Deploy to Render
+
+1. Push this folder to a **public** GitHub repo.
+2. In Render: **New → Web Service**, connect the repo.
+3. Build command: `npm install`
+4. Start command: `npm start`
+5. Render sets `PORT` automatically — the server already reads `process.env.PORT`.
+6. Your endpoint will be `https://<your-service>.onrender.com/release-gate`.
+
+## GitHub Actions evidence
+
+`.github/workflows/release-gate.yml` is named exactly `TDS GA7 Release Gate`,
+runs on push to `main`, has a step named exactly
+`TDS identity: 24f3003125@ds.study.iitm.ac.in`, and runs the test suite
+against the policy logic. Push to `main` once so the badge goes green, then
+submit the **workflow page URL**, e.g.:
+
+```
+https://github.com/<your-username>/<your-repo>/actions/workflows/release-gate.yml
+```
